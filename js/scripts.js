@@ -22,3 +22,11 @@ HangMan.prototype.findLetter = function() {
     }
   } return result;
 };
+
+HangMan.prototype.blankMaker = function() {
+  var word= this.words[Math.floor(Math.random()*this.words.length)];
+  word = word.split([]);
+  for (var i=0; i < word.length; i++) {
+    word[i] = "_";
+  } return word;
+}
