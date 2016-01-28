@@ -29,4 +29,8 @@ describe('blankReplacer', function (){
     var testWord = new HangMan();
     expect(testWord.blankReplacer()).to.eql(["_", "_", "_", "n", "_", "_", "_", "n"]);
   });
+  it("will replace '_' with 2nd correctly guessed letters", function (){
+    var testWord = new HangMan();
+    expect (testWord.blankReplacer()).to.eql(["m", "_", "_", "n", "_", "_", "_", "n"])
+  });
 });
