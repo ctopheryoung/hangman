@@ -12,14 +12,14 @@ HangMan.prototype.splitWord = function() {
   return word.split([]);
 };
 
-HangMan.prototype.findLetter = function() {
-  var result = []
+HangMan.prototype.findLetter = function(guessedLetter) {
+  var result = [];
   var word = this.splitWord();
     for (var i=0; i < word.length; i++) {
-      if(word[i] === "n") {
+      if(word[i] === guessedLetter) {
         result.push(word[i]);
-    }
-  } return result;
+    };
+  }; return result;
 };
 
 HangMan.prototype.blankMaker = function() {
@@ -29,13 +29,13 @@ HangMan.prototype.blankMaker = function() {
   } return word;
 }
 
-HangMan.prototype.blankReplacer = function() {
-  // debugger;
-  var word= this.splitWord();
-  var chosenLetter = "n";
+HangMan.prototype.blankReplacer = function(guessedLetter) {
   var hiddenWord = this.blankMaker();
-  for (var i=0; i < word.length; i++) {
-    var i = word.indexOf(chosenLetter, i+1);
-    hiddenWord[i] = chosenLetter;
-  } return(hiddenWord);
-}
+  var word = this.splitWord(); //mountain
+  for (var i = 0; i < word.length; i++) {
+    if (word[i] === guessedLetter) {
+      hiddenWord[i] = word[i];
+    }
+  };
+  return hiddenWord;
+};
