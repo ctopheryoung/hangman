@@ -30,3 +30,15 @@ HangMan.prototype.blankMaker = function() {
     word[i] = "_";
   } return word;
 }
+
+HangMan.prototype.blankReplacer = function() {
+  // debugger;
+  var word= this.words[Math.floor(Math.random()*this.words.length)];
+  word = word.split([]);
+  var chosenLetter = "n";
+  var hiddenWord = ["_", "_", "_", "_", "_", "_", "_", "_"];
+  for (var i=0; i < word.length; i++) {
+    var i = word.indexOf(chosenLetter, i+1);
+    hiddenWord[i] = chosenLetter;
+  } return(hiddenWord);
+}

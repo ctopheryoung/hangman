@@ -27,6 +27,6 @@ describe('blankMaker', function () {
 describe('blankReplacer', function (){
   it("will replace '_' with correctly guessed letters", function () {
     var testWord = new HangMan();
-    expect(testWord.blankReplacer()).to.eql(["_", "o", "_", "_", "_", "_", "_", "_"]);
+    expect(testWord.blankReplacer()).to.eql(["_", "_", "_", "n", "_", "_", "_", "n"]);
   });
 });
