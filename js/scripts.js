@@ -12,15 +12,15 @@ HangMan.prototype.splitWord = function() {
   return word.split([]);
 };
 
-HangMan.prototype.findLetter = function(guessedLetter) {
-  var result = [];
-  var word = this.splitWord();
-    for (var i=0; i < word.length; i++) {
-      if(word[i] === guessedLetter) {
-        result.push(word[i]);
-    };
-  }; return result;
-};
+// HangMan.prototype.findLetter = function(guessedLetter) {
+//   var result = [];
+//   var word = this.splitWord();
+//     for (var i=0; i < word.length; i++) {
+//       if(word[i] === guessedLetter) {
+//         result.push(word[i]);
+//     };
+//   }; return result;
+// };
 
 HangMan.prototype.blankMaker = function() {
   var word= this.splitWord();
@@ -30,12 +30,22 @@ HangMan.prototype.blankMaker = function() {
 }
 
 HangMan.prototype.blankReplacer = function(guessedLetter) {
-  var hiddenWord = this.blankMaker();
-  var word = this.splitWord(); //mountain
+  var word = this.splitWord(); //["m", "o", "u", "n", "t", "a", "i", "n"]
+  var hiddenWord = []; //["_", "_", "_", "_", "_", "_", "_", "_"]
   for (var i = 0; i < word.length; i++) {
-    if (word[i] === guessedLetter) {
+    hiddenWord.push("_")
+    if (word[i] === guessedLetter)  {
       hiddenWord[i] = word[i];
     }
   };
-  return hiddenWord;
+  return hiddenWord; //["_", "_", "_", "n", "_", "_", "_", "n"]
 };
+
+$(document).ready(function() {
+  $("input#startGame").click(function(event) {
+    $("#pickedWord").empty();
+    var gameWord = new HangMan;
+    $("#pickedWord").append(gameWord.blankMaker());
+    $("#wrong0").show();
+  });
+})
