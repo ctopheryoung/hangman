@@ -1,51 +1,72 @@
 function HangMan(words) {
   this.words = ["mountain"];
+  this.wrongGuesses = 0;
+  this.word = this.chooseWord();
+  this.wordBlank = this.blankMaker();
 };
 
 HangMan.prototype.chooseWord = function() {
-  var word = this.words[Math.floor(Math.random()*this.words.length)];
-  return word;
+  return this.word = this.words[Math.floor(Math.random()*this.words.length)];
 };
-
-HangMan.prototype.splitWord = function() {
-  var word = this.chooseWord();
-  return word.split([]);
-};
-
-// HangMan.prototype.findLetter = function(guessedLetter) {
-//   var result = [];
-//   var word = this.splitWord();
-//     for (var i=0; i < word.length; i++) {
-//       if(word[i] === guessedLetter) {
-//         result.push(word[i]);
-//     };
-//   }; return result;
-// };
 
 HangMan.prototype.blankMaker = function() {
-  var word= this.splitWord();
-  for (var i=0; i < word.length; i++) {
-    word[i] = "_";
-  } return word;
+  var array = [];
+  for (var i = 0; i < this.word.length; i++) {
+    array.push("_");
+  }
+  return array;
 }
 
 HangMan.prototype.blankReplacer = function(guessedLetter) {
-  var word = this.splitWord(); //["m", "o", "u", "n", "t", "a", "i", "n"]
-  var hiddenWord = []; //["_", "_", "_", "_", "_", "_", "_", "_"]
-  for (var i = 0; i < word.length; i++) {
-    hiddenWord.push("_")
-    if (word[i] === guessedLetter)  {
-      hiddenWord[i] = word[i];
+  for (var i = 0; i < this.word.length; i++) {
+    if (this.word.charAt(i) === guessedLetter)  {
+      this.wordBlank[i] = guessedLetter;
+    } else {
+
     }
   };
-  return hiddenWord; //["_", "_", "_", "n", "_", "_", "_", "n"]
+};
+
+HangMan.prototype.wrongCount = function(guessedLetter) {
+  var wrongGuess = this.word.indexOf(guessedLetter);
+    if (wrongGuess === -1) {
+      this.wrongGuesses += 1;
+    };
 };
 
 $(document).ready(function() {
-  $("input#startGame").click(function(event) {
+  var gameWord = new HangMan();
+  $("input#startGame").click(function() {
     $("#pickedWord").empty();
-    var gameWord = new HangMan;
-    $("#pickedWord").append(gameWord.blankMaker());
+    $("#pickedWord").append(gameWord.wordBlank);
     $("#wrong0").show();
   });
-})
+  $(".letters").click(function() {
+    var guessedLetter = $(this).val();
+    gameWord.wrongCount(guessedLetter);
+    gameWord.blankReplacer(guessedLetter);
+    $("#pickedWord").empty();
+    $("#pickedWord").append(gameWord.wordBlank);
+    console.log(gameWord.wordBlank);
+    console.log(gameWord.wrongGuesses);
+    if (gameWord.wrongGuesses === 1) {
+      $("#wrong0").hide();
+      $("#wrong1").show();
+    } else if (gameWord.wrongGuesses === 2) {
+      $("#wrong1").hide();
+      $("#wrong2").show();
+    } else if (gameWord.wrongGuesses === 3) {
+      $("#wrong2").hide();
+      $("#wrong3").show();
+    } else if (gameWord.wrongGuesses === 4) {
+      $("#wrong3").hide();
+      $("#wrong4").show();
+    } else if (gameWord.wrongGuesses === 5) {
+      $("#wrong4").hide();
+      $("#wrong5").show();
+    } else if (gameWord.wrongGuesses === 6) {
+      $("#wrong5").hide();
+      $("#wrong6").show();
+    };
+  });
+});
