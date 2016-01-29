@@ -1,5 +1,5 @@
 function HangMan(words) {
-  this.words = ["mountain"];
+  this.words = ["mountain", "tree", "river", "rock", "ocean", "sea"];
   this.wrongGuesses = 0;
   this.word = this.chooseWord();
   this.wordBlank = this.blankMaker();

@@ -3,6 +3,10 @@
   letter-spacing: 12px;
 }
 
+#startGame {
+  margin-right: 40px;
+}
+
 #wrong0 {
   display: none;
 }
